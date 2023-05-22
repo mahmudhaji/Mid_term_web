@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Link-Table-Generator</title>
+</head>
+<body>
+  
+
+  <script>
+    let data = ["syllabus.html", "p1.html", "p2.html", "style.html", "email.html",
+     "system.html", "process.html"];
+    let endRange = data.length;
+
+    document.addEventListener("DOMContentLoaded", function() {
+      let validRangeMsg = "Valid Range: 1-" + endRange;
+      document.getElementById("startRange").setAttribute("max", endRange);
+      document.getElementById("endRange").setAttribute("max", endRange);
+      document.getElementById("endRange").setAttribute("value", endRange);
+      document.getElementById("linkTable").insertAdjacentHTML("beforebegin", validRangeMsg);
+    });
+
+    function displayTable() {
+      let startRange = parseInt(document.getElementById("startRange").value);
+      let endRange = parseInt(document.getElementById("endRange").value);
+      let linkTable = document.getElementById("linkTable");
+      let tableContent = "";
+
+      if (startRange >= 1 && startRange <= endRange && endRange <= data.length) {
+        for (let i = startRange - 1; i < endRange; i++) {
+          tableContent += "<tr><td><a href='" + data[i] + "'>" + data[i] + "</a></td></tr>";
+        }
+      } else {
+        tableContent = "Invalid range, valid range: 1-" + endRange;
+      }
+
+      linkTable.innerHTML = "<tr><th>Links</th></tr>" + tableContent;
+    }
+  </script>
+
+<form id="linkForm">
+  <u> <h4>form</h4></u>
+  <label for="startRange">Start Range:</label>
+  <input type="number" id="startRange" value="1">
+  <label for="endRange">End Range:</label>
+  <input type="number" id="endRange" value="1"> <br><br>
+  <button type="button" onclick="displayTable()">Generate Table</button>
+</form>
+<table id="linkTable">
+  <tr>
+    <th></th>
+  </tr>
+</table>
+</body>
+</html>
